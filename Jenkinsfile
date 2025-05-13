@@ -10,19 +10,20 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'  // instead of sh 'npm install'
+                sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'npm test'  // instead of sh 'npm test'
+                sh 'pytest'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'npm run deploy'  // if applicable
+                echo 'Deploy step (optional)'
+                // For actual deployment: SCP, Docker, etc.
             }
         }
     }
