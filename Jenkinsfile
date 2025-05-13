@@ -21,11 +21,10 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                // Replace with your actual test framework
-                bat "${PYTHON} -m unittest discover tests"
-            }
-        }
+    steps {
+        bat 'D:\\Python\\python.exe -m unittest discover -s . -p "test_*.py"'
+    }
+}
 
         stage('Deploy') {
             steps {
