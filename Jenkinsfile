@@ -3,27 +3,26 @@ pipeline {
 
     stages {
         stage('Clone Repo') {
-    steps {
-        git url: 'https://github.com/secret-sys/Jenkins.git', branch: 'main'
-    }
-}
+            steps {
+                git 'https://github.com/secret-sys/Jenkins.git'
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat 'npm install'  // instead of sh 'npm install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest'
+                bat 'npm test'  // instead of sh 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy step (optional)'
-                // For actual deployment: SCP, Docker, etc.
+                bat 'npm run deploy'  // if applicable
             }
         }
     }
