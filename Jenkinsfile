@@ -3,10 +3,10 @@ pipeline {
 
     stages {
         stage('Clone Repo') {
-            steps {
-                git 'https://github.com/secret-sys/Jenkins.git',branch: 'main'
-            }
-        }
+    steps {
+        git url: 'https://github.com/secret-sys/Jenkins.git', branch: 'main'
+    }
+}
 
         stage('Install Dependencies') {
             steps {
