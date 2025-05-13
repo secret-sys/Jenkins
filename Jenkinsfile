@@ -2,12 +2,8 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/secret-sys/Jenkins.git'
-            }
-        }
-
+        // Remove the 'Clone Repo' stage entirely
+        // Jenkins will handle the checkout based on the job configuration
         stage('Install Dependencies') {
             steps {
                 sh 'pip install -r requirements.txt'
