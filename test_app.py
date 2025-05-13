@@ -1,7 +1,14 @@
+import unittest
 from app import app
 
-def test_home():
-    client = app.test_client()
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.data == b"Hello from Jenkins CI/CD!"
+class AppTestCase(unittest.TestCase):
+    def setUp(self):
+        self.client = app.test_client()
+
+    def test_home(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Hello, Jenkins!', response.data)
+
+if __name__ == '__main__':
+    unittest.main()

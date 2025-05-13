@@ -1,30 +1,46 @@
 pipeline {
     agent any
 
+    environment {
+        PIP = 'D:\\Python\\Scripts\\pip.exe'
+        PYTHON = 'D:\\Python\\python.exe'
+    }
+
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/secret-sys/Jenkins.git'
+                git branch: 'main', url: 'https://github.com/secret-sys/Jenkins.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                bat "${PIP} install --upgrade pip"
+                bat "${PIP} install -r requirements.txt"
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest'
+                // Replace with your actual test framework
+                bat "${PYTHON} -m unittest discover tests"
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy step (optional)'
-                // For actual deployment: SCP, Docker, etc.
+                echo 'Deploying Application...'
+                // Add actual deployment steps here
             }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Pipeline failed!'
+        }
+        success {
+            echo 'Pipeline succeeded!'
         }
     }
 }
